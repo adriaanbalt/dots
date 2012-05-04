@@ -1,4 +1,16 @@
 BALT-toolbox
 ============
 
-apache files, sublime text 2 plugins, references
+apache files
+	* other/(conf)
+	* httpd.conf
+
+bash
+	* bash_profile
+	* profile
+
+ssh
+	* id_rsa.pub
+
+sublime text 2
+	
