@@ -32,6 +32,30 @@ alias vho='subl /opt/local/apache2/conf/extra/httpd-vhosts.conf'
 alias mamp="sudo port load apache2"
 alias un_mamp="sudo port unload apache2"
 
+c () {
+   clear
+}
+
+status () {
+   git status
+}
+
+add () {
+   git add "$@"
+}
+
+commit () {
+   git commit -a -m"$@"
+}
+
+pull () {
+   git pull origin "$@"
+}
+
+push () {
+   git push origin "$@"
+}
+
 # alias for svn to use colorsvn
 # alias svn='colorsvn'
 
