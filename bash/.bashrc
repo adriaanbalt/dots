@@ -1,5 +1,5 @@
 
-PATH=/opt/local/bin:~/bin:$PATH
+PATH=/opt/local/bin:$PATH
 
 [[ -s "/Users/BALT/.rvm/scripts/rvm" ]] && source "/Users/BALT/.rvm/scripts/rvm"
 
@@ -9,10 +9,17 @@ alias l='ls -GF'
 # alias for quickly listing a directory
 alias ll='ls -al -GF'
 
+
+# alias for going back a directory
+alias ..='cd ..'
+
+# alias for going back two directory
+alias ...='cd ../..'
+
 # alias for watching haml files in the current directory
 # this is dependant on the having the haml_watch.rb file in the repo
 # available @ https://gist.github.com/2720418
-alias watch_haml='ruby haml_watch.rb ./'
+#alias watch_haml='ruby haml_watch.rb ./'
 
 # alias for quick DNS cache flushing
 alias fc='sudo dscacheutil -flushcache'
@@ -133,6 +140,8 @@ function get_rvm_info() {
    rvm-prompt v g 2> /dev/null
 }
 
-PS1='${YELLOW}$(get_rvm_info) ${MAGENTA}\u${RESET} ${GREEN}\w${RESET}${CYAN}`__git_ps1 " %s"`${NORMAL}\r\n`set_prefix`${RESET} ${YELLOW}\033[s\033[60C (`date "+%a, %b, %d"`)\033[u${RESET}'
+#PS1='${YELLOW}$(get_rvm_info) ${MAGENTA}\u${RESET} ${GREEN}\w${RESET}${CYAN}`__git_ps1 " %s"`${NORMAL}\r\n`set_prefix`${RESET} ${YELLOW}\033[s\033[60C (`date "+%a, %b, %d"`)\033[u${RESET}'
 
+# PS1='${YELLOW}$(get_rvm_info) `set_prefix`${RESET} ${MAGENTA}\u${RESET} in ${GREEN}\w${RESET}${BLUE}`__git_ps1 " on %s"`${RESET}\r\n$ '
 
+PS1='${MAGENTA}$(get_rvm_info)  ${YELLOW}\u${RESET}\033[4C${RED}\h${RESET}\033[4C${GREEN}\w${RESET}${BLUE}`__git_ps1 "\033[4C%s"`${RESET}\r\n$ '
