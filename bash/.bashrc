@@ -1,7 +1,5 @@
 
-PATH=/opt/local/bin:$PATH
-
-[[ -s "/Users/BALT/.rvm/scripts/rvm" ]] && source "/Users/BALT/.rvm/scripts/rvm"
+PATH=~/Applications:/opt/local/bin:/usr/local/bin:$PATH
 
 # alias for quickly listing a directory
 alias l='ls -GF'
@@ -9,20 +7,17 @@ alias l='ls -GF'
 # alias for quickly listing a directory
 alias ll='ls -al -GF'
 
-
 # alias for going back a directory
 alias ..='cd ..'
 
 # alias for going back two directory
 alias ...='cd ../..'
 
-# alias for watching haml files in the current directory
-# this is dependant on the having the haml_watch.rb file in the repo
-# available @ https://gist.github.com/2720418
-#alias watch_haml='ruby haml_watch.rb ./'
-
 # alias for quick DNS cache flushing
 alias fc='sudo dscacheutil -flushcache'
+
+# alias for getting the last two weeks of git logs for the current repo
+alias harvest="git log --since @{2weeks} --date=local --reverse | grep -P 'Author:\sadriaanbalt\s<[\w\d@-]+>(\r|\n)Date:[\s]{3}.*$' > ./Timesheet.txt"
 
 # alias for getting the machine's ip address into the clipboard
 alias getip="ipconfig getpacket en0 | grep -oPe '(?<=yiaddr\s=\s)[\d\.]+' | pbcopy"
@@ -38,43 +33,6 @@ alias vho='subl /opt/local/apache2/conf/extra/httpd-vhosts.conf'
 # alias for un/loading MAMP
 alias mamp="sudo port load apache2"
 alias un_mamp="sudo port unload apache2"
-
-c () {
-   clear
-}
-
-status () {
-   git status
-}
-
-add () {
-   git add "$@"
-}
-
-commit () {
-   git commit -a -m"$@"
-}
-
-pull () {
-   git pull origin "$@"
-}
-
-push () {
-   git push origin "$@"
-}
-
-# alias for svn to use colorsvn
-# alias svn='colorsvn'
-
-# alias for common git commands
-# alias gs='git status'
-# alias ga='git add'
-# alias gb='git branch'
-# alias gco='git checkout'
-# alias grH='git reset --hard'
-# alias gcf='git checkout -- '
-# alias gc='git commit'
-# alias glp='git log --graph --pretty=format:"The author of %h was %an, %ar, and they said \"%s\""'
 
 # enable the git bash completion commands
 if [ -f ~/.git-completion ]; then
@@ -116,32 +74,4 @@ RESET=$(tput sgr0)
 
 
 # set prompt to show current working directory and git branch name, if it exists
-
-# this prompt is a green username, black @ symbol, cyan host, magenta current working directory, and white git branch (only shows if you're in a git branch)
-# unstaged and untracked symbols are shown, too (see above)
-# this prompt uses the short color codes defined above
-# PS1='${GREEN}\u${BLACK}@${CYAN}\h:${MAGENTA}\w${WHITE}`__git_ps1 " (%s)"`\$ '
-
-# return the prompt prefix for the second line
-function set_prefix {
-	BRANCH=`__git_ps1`
-	if [[ -z $BRANCH ]]; then
-		echo "${RESET}o"
-	else
-		echo "${UNDERLINE}+"
-	fi
-}
-
-function parse_git_branch () {
-   git branch 2>/dev/null|grep -e ^* | tr -d \*\;
-}
-
-function get_rvm_info() {
-   rvm-prompt v g 2> /dev/null
-}
-
-#PS1='${YELLOW}$(get_rvm_info) ${MAGENTA}\u${RESET} ${GREEN}\w${RESET}${CYAN}`__git_ps1 " %s"`${NORMAL}\r\n`set_prefix`${RESET} ${YELLOW}\033[s\033[60C (`date "+%a, %b, %d"`)\033[u${RESET}'
-
-# PS1='${YELLOW}$(get_rvm_info) `set_prefix`${RESET} ${MAGENTA}\u${RESET} in ${GREEN}\w${RESET}${BLUE}`__git_ps1 " on %s"`${RESET}\r\n$ '
-
-PS1='${MAGENTA}$(get_rvm_info)  ${YELLOW}\u${RESET}\033[4C${RED}\h${RESET}\033[4C${GREEN}\w${RESET}${BLUE}`__git_ps1 "\033[4C%s"`${RESET}\r\n$ '
+PS1='${YELLOW}\u${RESET}\033[4C${RED}\h${RESET}\033[4C${GREEN}\w${RESET}${BLUE}`__git_ps1 "\033[4C%s"`${RESET}\r\n$ '
