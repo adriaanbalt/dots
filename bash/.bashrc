@@ -17,10 +17,25 @@ alias ...='cd ../..'
 alias fc='sudo dscacheutil -flushcache'
 
 # alias for getting the last two weeks of git logs for the current repo
-alias harvest="git log --since @{2weeks} --date=local --reverse | grep -P 'Author:\sadriaanbalt\s<[\w\d@-]+>(\r|\n)Date:[\s]{3}.*$' > ./Timesheet.txt"
+alias harvest="git log --since @{2weeks} --date=local --reverse | grep -P 'Author:\sadriaan.scholvinck\s<[\w\d@-]+>(\r|\n)Date:[\s]{3}.*$' > ./Timesheet.txt"
 
 # alias for getting the machine's ip address into the clipboard
 alias getip="ipconfig getpacket en0 | grep -oPe '(?<=yiaddr\s=\s)[\d\.]+' | pbcopy"
+
+# alias for git status
+alias gitst="git status"
+
+# alias for git commit
+alias gitc="git commit"
+
+# alias for git svn dcommit
+alias gitsc="git svn dcommit"
+
+# alias for git svn rebase - update a svn branch or repo
+alias gitsr="git svn rebase"
+
+# alias for compass watch
+alias compw="compass watch"
 
 # alias for searching SVN projects
 # bah! gotta make this a script instead
@@ -29,6 +44,8 @@ alias getip="ipconfig getpacket en0 | grep -oPe '(?<=yiaddr\s=\s)[\d\.]+' | pbco
 # alias for quickly editing hosts file
 alias ho='subl /etc/hosts'
 alias vho='subl /opt/local/apache2/conf/extra/httpd-vhosts.conf'
+
+alias httpd='subl /etc/apache2/httpd.conf'
 
 # alias for un/loading MAMP
 alias mamp="sudo port load apache2"
@@ -74,4 +91,5 @@ RESET=$(tput sgr0)
 
 
 # set prompt to show current working directory and git branch name, if it exists
-PS1='${YELLOW}\u${RESET}\033[4C${RED}\h${RESET}\033[4C${GREEN}\w${RESET}${BLUE}`__git_ps1 "\033[4C%s"`${RESET}\r\n$ '
+PS1='${YELLOW}\u${RESET}\033[4C${GREEN}\w${RESET}${CYAN}`__git_ps1 "\033[4C%s%s"`${RESET}\r\n$ '
+
