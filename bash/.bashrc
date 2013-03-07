@@ -37,6 +37,14 @@ alias gitsr="git svn rebase"
 # alias for compass watch
 alias compw="compass watch"
 
+alias gitfo="git fetch origin"
+
+alias gitrh='git reset --hard origin/master'
+
+alias gitpull='git pull origin master'
+
+alias gitpush='git push origin master'
+
 # alias for searching SVN projects
 # bah! gotta make this a script instead
 # alias sslamp="curl -# http://192.168.1.102/projects | grep -oP '(?<=>)?`$1`(?:.+)?(?=<)'"
