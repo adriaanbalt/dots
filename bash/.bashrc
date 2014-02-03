@@ -1,5 +1,7 @@
 
-PATH=~/Applications:/opt/local/bin:/usr/local/bin:$PATH
+PATH=~/Applications:/opt/local/bin:/usr/local/bin:/usr/local/share/npm/bin:$PATH
+
+NODE_PATH=/usr/local/lib/node
 
 # alias for quickly listing a directory
 alias l='ls -GF'
@@ -17,10 +19,37 @@ alias ...='cd ../..'
 alias fc='sudo dscacheutil -flushcache'
 
 # alias for getting the last two weeks of git logs for the current repo
-alias harvest="git log --since @{2weeks} --date=local --reverse | grep -P 'Author:\sadriaanbalt\s<[\w\d@-]+>(\r|\n)Date:[\s]{3}.*$' > ./Timesheet.txt"
+alias harvest="git log --since @{2weeks} --date=local --reverse | grep -P 'Author:\sadriaan.scholvinck\s<[\w\d@-]+>(\r|\n)Date:[\s]{3}.*$' > ./Timesheet.txt"
 
 # alias for getting the machine's ip address into the clipboard
 alias getip="ipconfig getpacket en0 | grep -oPe '(?<=yiaddr\s=\s)[\d\.]+' | pbcopy"
+
+# alias for git status
+alias gitst="git status"
+
+# alias for git commit
+alias gitc="git commit"
+
+# alias for git svn dcommit
+alias gitsc="git svn dcommit"
+
+# alias for git svn rebase - update a svn branch or repo
+alias gitsr="git svn rebase"
+
+# alias for compass watch
+alias compw="compass watch"
+
+alias gitfo="git fetch origin"
+
+alias gitrh='git reset --hard origin/master'
+
+alias gitpull='git pull origin master'
+
+alias gitpush='git push origin master'
+
+alias mysqls='mysql.server start'
+
+alias apacher='sudo apachectl restart'
 
 # alias for searching SVN projects
 # bah! gotta make this a script instead
@@ -30,10 +59,57 @@ alias getip="ipconfig getpacket en0 | grep -oPe '(?<=yiaddr\s=\s)[\d\.]+' | pbco
 alias ho='subl /etc/hosts'
 alias vho='subl /opt/local/apache2/conf/extra/httpd-vhosts.conf'
 
+alias httpd='subl /etc/apache2/httpd.conf'
+
 # alias for un/loading MAMP
 alias mamp="sudo port load apache2"
 alias un_mamp="sudo port unload apache2"
 
+alias errs='tail -f logs/error.log'
+
+c () {
+   clear
+}
+
+status () {
+   git status
+}
+
+add () {
+   git add "$@"
+}
+
+commit () {
+   git commit -a -m"$@"
+}
+
+pull () {
+   git pull origin "$@"
+}
+
+push () {
+   git push origin "$@"
+}
+
+gitresetpush () {
+   git reset --hard HEAD~"$@"
+   git push origin HEAD --force
+}
+
+gitreset (){
+  git reset --hard "$@"
+}
+
+gitco (){
+  git checkout "$@"
+}
+
+migrateseed (){
+  composer dump-autoload
+  php artisan migrate:reset 
+  php artisan db:seed
+}
+ 
 # enable the git bash completion commands
 if [ -f ~/.git-completion ]; then
   source ~/.git-completion
@@ -74,4 +150,5 @@ RESET=$(tput sgr0)
 
 
 # set prompt to show current working directory and git branch name, if it exists
-PS1='${YELLOW}\u${RESET}\033[4C${RED}\h${RESET}\033[4C${GREEN}\w${RESET}${BLUE}`__git_ps1 "\033[4C%s"`${RESET}\r\n$ '
+PS1='${YELLOW}\u${RESET}\033[4C${GREEN}\w${RESET}${CYAN}`__git_ps1 "\033[4C%s%s"`${RESET}\r\n$ '
+
