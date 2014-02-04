@@ -104,9 +104,13 @@ gitco (){
   git checkout "$@"
 }
 
-migrateseed (){
+compdump (){
   composer dump-autoload
-  php artisan migrate:reset 
+}
+artmigrate () {
+  php artisan migrate
+}
+artseed (){
   php artisan db:seed
 }
  
