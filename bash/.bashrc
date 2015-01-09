@@ -1,7 +1,15 @@
 
-PATH=~/Applications:/opt/local/bin:/usr/local/bin:/usr/local/share/npm/bin:$PATH
+PATH=~/Applications:/usr/local/Cellar/php54/5.4.28/bin:/opt/local/bin:/usr/local/bin:/usr/local/share/npm/bin:~/bin:$(brew --prefix josegonzalez/php/php54):$PATH
 
 NODE_PATH=/usr/local/lib/node
+
+source $(brew --prefix nvm)/nvm.sh
+
+source ~/.profile
+
+if [ -f `brew --prefix`/etc/bash_completion ]; then
+    . `brew --prefix`/etc/bash_completion
+fi
 
 # alias for quickly listing a directory
 alias l='ls -GF'
@@ -43,10 +51,6 @@ alias gitfo="git fetch origin"
 
 alias gitrh='git reset --hard origin/master'
 
-alias gitpull='git pull origin master'
-
-alias gitpush='git push origin master'
-
 alias mysqls='mysql.server start'
 
 alias apacher='sudo apachectl restart'
@@ -80,7 +84,7 @@ add () {
 }
 
 commit () {
-   git commit -a -m"$@"
+   git commit -m"$@"
 }
 
 pull () {
@@ -94,6 +98,10 @@ push () {
 gitresetpush () {
    git reset --hard HEAD~"$@"
    git push origin HEAD --force
+}
+
+gitcp () {
+   git cherry-pick -n "$@"
 }
 
 gitreset (){
@@ -112,6 +120,14 @@ artmigrate () {
 }
 artseed (){
   php artisan db:seed
+}
+
+delremote () {
+  git push origin :"$@"
+}
+
+dellocal () {
+  git branch -D "$@"
 }
  
 # enable the git bash completion commands
@@ -156,3 +172,8 @@ RESET=$(tput sgr0)
 # set prompt to show current working directory and git branch name, if it exists
 PS1='${YELLOW}\u${RESET}\033[4C${GREEN}\w${RESET}${CYAN}`__git_ps1 "\033[4C%s%s"`${RESET}\r\n$ '
 
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
